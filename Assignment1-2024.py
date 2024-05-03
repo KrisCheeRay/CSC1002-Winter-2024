@@ -1,7 +1,11 @@
 import random
 
-def display_introductions():
-    """Display an introduction message to the player about the game."""
+def display_introductions()-> None:
+    """Display an introduction message to the player about the game.
+       
+       Args: None
+       Returns: None
+    """
     
     print("Welcome to Dylan's 8-tile puzzle game, you will be prompted to solve a shuffled 8-tile puzzle. Hope you enjoy it!")
     print("You will enter four letters to use for moving tiles left, right, up, and down.")
@@ -13,6 +17,9 @@ def get_valid_moves() -> tuple[str, str, str, str]:
     
     Validates the input to ensure it consists of four unique alphabetic characters.
     Returns a tuple of the characters representing left, right, up, and down moves.
+
+    Args: None
+    Returns: tuple[str, str, str, str]
     """
     
     while True:
@@ -29,6 +36,9 @@ def initialize_chessboard() -> list[int, str]:
     
     The chessboard is a list with numbers 1 through 8 and a blank space represented by ' '.
     The function ensures the generated chessboard is solvable for the user.
+
+    Args: None
+    Returns: list[int, str]
     """
     
     chessboard = list(range(1, 9)) + [' ']
@@ -44,6 +54,9 @@ def is_solvable(chessboard: list[str, int]) -> bool:
     
     Counts the total number of inversions in the chessboard. A solvable configuration
     has an even number of inversions.
+
+    Args: list[str, int]
+    Returns: bool
     """
     
     inversion_count = 0
@@ -60,6 +73,9 @@ def get_possible_moves(index: int) -> list[str]:
     
     Returns a list of possible moves ('left', 'right', 'up', 'down') depending on where
     the empty tile (' ') is located on the chessboard.
+
+    Args: int
+    Returns: list[str]
     """
     
     moves = {'left': index % 3 != 0, 'right': index % 3 != 2, 'up': index >= 3, 'down': index < 6}
@@ -68,7 +84,11 @@ def get_possible_moves(index: int) -> list[str]:
 
 
 def print_chessboard(chessboard: list[str, int]):
-    """Print the current state of the chessboard."""
+    """Print the current state of the chessboard.
+    
+    Args: list[str, int]
+    Returns: None
+    """
     
     for i in range(0, 9, 3):
         print(f"{chessboard[i]} {chessboard[i+1]} {chessboard[i+2]}")
@@ -77,6 +97,9 @@ def print_chessboard(chessboard: list[str, int]):
 def move_tile(chessboard: list, move: str, moves: tuple[str, str, str, str]):
     """
     Move a tile based on the player's input, adjusting the logic to reflect the movement of numbers towards the specified direction.
+    
+    Args: list, str, tuple[str, str, str, str]
+    Returns: None
     """
     
     index = chessboard.index(' ')
@@ -104,6 +127,9 @@ def is_solved(chessboard: list[str, int]) -> bool:
     Check if the current chessboard configuration matches the solved state.
     
     A solved chessboard has tiles in numerical order with the blank space at the end.
+
+    Args: list[str, int]
+    Returns: bool
     """
     
     return chessboard == list(range(1, 9)) + [' ']
@@ -130,6 +156,9 @@ def play_game(moves: tuple[str, str, str, str]):
     
     Initializes the chessboard, processes player moves, and checks for game completion.
     Prompts the player for moves until the puzzle is solved, then offers a new game or exit.
+
+    Args: tuple[str, str, str, str]
+    Returns: None
     """
     
     chessboard = initialize_chessboard()
@@ -171,7 +200,12 @@ def play_game(moves: tuple[str, str, str, str]):
     ask_for_next_round(moves)
 
 def main():
-    """Run the game."""
+    """Run the game.
+    
+    Display the introduction message, prompt the player for moves, and start the game loop.
+    Args: None
+    Returns: None
+    """
    
     display_introductions()
     moves = get_valid_moves()
